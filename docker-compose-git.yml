@@ -1,0 +1,20 @@
+
+version: '2.1'
+services:
+  git:
+    image: home1oss/docker-proxy:1.10.2-alpine
+    restart: always
+    command: ["nginx", "-g", "daemon off;"]
+    container_name: ${SERVER_NAME:-git.local}
+    hostname: ${SERVER_NAME:-git.local}
+    ports:
+    - "80/tcp"
+    environment:
+    - BACKEND_HOST=${BACKEND_HOST:-gitlab.local}
+    - BACKEND_PORT=${BACKEND_PORT:-10080}
+    - SERVER_NAME=${SERVER_NAME:-git.local}
+
+networks:
+  default:
+    external:
+      name: oss-network
