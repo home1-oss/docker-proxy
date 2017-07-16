@@ -1,0 +1,22 @@
+
+version: '2.1'
+services:
+  fileserver:
+    image: home1oss/docker-proxy:1.10.2-alpine
+    restart: always
+    command: ["nginx", "-g", "daemon off;"]
+    container_name: ${SERVER_NAME:-fileserver.local}
+    hostname: ${SERVER_NAME:-fileserver.local}
+    ports:
+    - "80/tcp"
+    environment:
+    - BACKEND_HOST=${BACKEND_HOST:-nexus3.local}
+    - BACKEND_PORT=${BACKEND_PORT:-28081}
+    - SERVER_LOCATION=${SERVER_LOCATION:-~ ^/(.*)}
+    - SERVER_NAME=${SERVER_NAME:-fileserver.local}
+    - SERVER_PROXY_PASS_CONTEXT=${SERVER_PROXY_PASS_CONTEXT:-/nexus/repository/files/$1}
+
+networks:
+  default:
+    external:
+      name: oss-network

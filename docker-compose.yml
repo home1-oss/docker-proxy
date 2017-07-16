@@ -1,0 +1,21 @@
+
+version: '2.1'
+services:
+  docker-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: home1oss/docker-proxy:1.10.2-alpine
+    restart: always
+    command: ["nginx", "-g", "daemon off;"]
+    container_name: ${DOCKER_PROXY_HOSTNAME:-docker-proxy.local}
+    hostname: ${DOCKER_PROXY_HOSTNAME:-docker-proxy.local}
+    ports:
+    - "80:80/tcp"
+    environment:
+    - SERVER_NAME=${SERVER_NAME:-*.local}
+
+networks:
+  default:
+    external:
+      name: oss-network

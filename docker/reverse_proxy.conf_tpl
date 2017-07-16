@@ -1,0 +1,26 @@
+
+upstream backend {
+  server <BACKEND_HOST_PORT>;
+}
+
+proxy_send_timeout 120;
+proxy_read_timeout 300;
+proxy_buffering    off;
+tcp_nodelay        on;
+client_max_body_size 10240M;
+
+server {
+  server_name <SERVER_NAME>;
+
+  location <SERVER_LOCATION> {
+
+    <BASIC_AUTH_SETTING>
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_redirect  off;
+
+    proxy_pass <SERVER_PROXY_PASS>;
+  }
+}
