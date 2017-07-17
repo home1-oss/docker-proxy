@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: home1oss/docker-proxy:1.10.2-alpine
+    image: home1oss/proxy:1.10.2-alpine
     restart: always
     command: ["nginx", "-g", "daemon off;"]
     container_name: ${DOCKER_PROXY_HOSTNAME:-docker-proxy.local}
