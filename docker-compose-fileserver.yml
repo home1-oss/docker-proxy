@@ -5,15 +5,15 @@ services:
     image: home1oss/proxy:1.10.2-alpine
     restart: always
     command: ["nginx", "-g", "daemon off;"]
-    container_name: ${SERVER_NAME:-fileserver.local}
-    hostname: ${SERVER_NAME:-fileserver.local}
+    container_name: ${SERVER_DOMAIN:-fileserver}.${INFRASTRUCTURE:-local}
+    hostname: ${SERVER_DOMAIN:-fileserver}.${INFRASTRUCTURE:-local}
     ports:
     - "80/tcp"
     environment:
-    - BACKEND_HOST=${BACKEND_HOST:-nexus3.local}
+    - BACKEND_HOST=${BACKEND_DOMAIN:-nexus3}.${INFRASTRUCTURE:-local}
     - BACKEND_PORT=${BACKEND_PORT:-28081}
     - SERVER_LOCATION=${SERVER_LOCATION:-~ ^/(.*)}
-    - SERVER_NAME=${SERVER_NAME:-fileserver.local}
+    - SERVER_NAME=${SERVER_DOMAIN:-fileserver}.${INFRASTRUCTURE:-local}
     - SERVER_PROXY_PASS_CONTEXT=${SERVER_PROXY_PASS_CONTEXT:-/nexus/repository/files/$1}
 
 networks:

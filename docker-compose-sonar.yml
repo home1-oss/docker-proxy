@@ -5,14 +5,14 @@ services:
     image: home1oss/proxy:1.10.2-alpine
     restart: always
     command: ["nginx", "-g", "daemon off;"]
-    container_name: ${SERVER_NAME:-sonar.local}
-    hostname: ${SERVER_NAME:-sonar.local}
+    container_name: ${SERVER_DOMAIN:-sonar}.${INFRASTRUCTURE:-local}
+    hostname: ${SERVER_DOMAIN:-sonar}.${INFRASTRUCTURE:-local}
     ports:
     - "80/tcp"
     environment:
-    - BACKEND_HOST=${BACKEND_HOST:-sonarqube.local}
+    - BACKEND_HOST=${BACKEND_DOMAIN:-sonarqube}.${INFRASTRUCTURE:-local}
     - BACKEND_PORT=${BACKEND_PORT:-9000}
-    - SERVER_NAME=${SERVER_NAME:-sonar.local}
+    - SERVER_NAME=${SERVER_DOMAIN:-sonar}.${INFRASTRUCTURE:-local}
 
 networks:
   default:

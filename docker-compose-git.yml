@@ -5,14 +5,14 @@ services:
     image: home1oss/proxy:1.10.2-alpine
     restart: always
     command: ["nginx", "-g", "daemon off;"]
-    container_name: ${SERVER_NAME:-git.local}
-    hostname: ${SERVER_NAME:-git.local}
+    container_name: ${SERVER_DOMAIN:-git}.${INFRASTRUCTURE:-local}
+    hostname: ${SERVER_DOMAIN:-git}.${INFRASTRUCTURE:-local}
     ports:
     - "80/tcp"
     environment:
-    - BACKEND_HOST=${BACKEND_HOST:-gitlab.local}
+    - BACKEND_HOST=${BACKEND_DOMAIN:-gitlab}.${INFRASTRUCTURE:-local}
     - BACKEND_PORT=${BACKEND_PORT:-10080}
-    - SERVER_NAME=${SERVER_NAME:-git.local}
+    - SERVER_NAME=${SERVER_DOMAIN:-git}.${INFRASTRUCTURE:-local}
 
 networks:
   default:

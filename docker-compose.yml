@@ -8,12 +8,12 @@ services:
     image: home1oss/proxy:1.10.2-alpine
     restart: always
     command: ["nginx", "-g", "daemon off;"]
-    container_name: ${DOCKER_PROXY_HOSTNAME:-docker-proxy.local}
-    hostname: ${DOCKER_PROXY_HOSTNAME:-docker-proxy.local}
+    container_name: ${DOCKER_PROXY_DOMAIN:-docker-proxy}.${INFRASTRUCTURE:-local}
+    hostname: ${DOCKER_PROXY_DOMAIN:-docker-proxy}.${INFRASTRUCTURE:-local}
     ports:
     - "80:80/tcp"
     environment:
-    - SERVER_NAME=${SERVER_NAME:-*.local}
+    - SERVER_NAME=${SERVER_DOMAIN:-*}.${INFRASTRUCTURE:-local}
 
 networks:
   default:

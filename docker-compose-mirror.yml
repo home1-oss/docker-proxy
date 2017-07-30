@@ -5,16 +5,16 @@ services:
     image: home1oss/proxy:1.10.2-alpine
     restart: always
     command: ["nginx", "-g", "daemon off;"]
-    container_name: ${SERVER_NAME:-mirror.docker.local}
-    hostname: ${SERVER_NAME:-mirror.docker.local}
+    container_name: ${SERVER_DOMAIN:-mirror.docker}.${INFRASTRUCTURE:-local}
+    hostname: ${SERVER_DOMAIN:-mirror.docker}.${INFRASTRUCTURE:-local}
     ports:
     - "80/tcp"
     environment:
-    - BACKEND_HOST=${BACKEND_HOST:-nexus3.local}
+    - BACKEND_HOST=${BACKEND_DOMAIN:-nexus3}.${INFRASTRUCTURE:-local}
     - BACKEND_PORT=${BACKEND_PORT:-5001}
     - BASIC_AUTH_PASS=${BASIC_AUTH_PASS:-deployment}
     - BASIC_AUTH_USER=${BASIC_AUTH_USER:-deployment}
-    - SERVER_NAME=${SERVER_NAME:-mirror.docker.local}
+    - SERVER_NAME=${SERVER_DOMAIN:-mirror.docker.local}.${INFRASTRUCTURE:-local}
 
 networks:
   default:
