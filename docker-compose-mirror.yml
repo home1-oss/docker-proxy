@@ -14,7 +14,7 @@ services:
     - BACKEND_PORT=${BACKEND_PORT:-5001}
     - BASIC_AUTH_PASS=${BASIC_AUTH_PASS:-deployment}
     - BASIC_AUTH_USER=${BASIC_AUTH_USER:-deployment}
-    - SERVER_NAME=${SERVER_DOMAIN:-mirror.docker.local}.${INFRASTRUCTURE:-local}
+    - SERVER_NAME=${SERVER_DOMAIN:-mirror.docker}.${INFRASTRUCTURE:-local}
 
 networks:
   default:
