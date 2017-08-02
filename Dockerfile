@@ -3,6 +3,7 @@
 
 FROM nginx:1.10.2-alpine
 
+COPY docker/nginx.conf /etc/nginx/nginx.conf
 COPY docker/entrypoint.sh /entrypoint.sh
 COPY docker/render.sh /render.sh
 COPY docker/proxy.conf_tpl /proxy.conf_tpl
