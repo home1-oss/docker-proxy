@@ -1,6 +1,8 @@
 
 # Nginx does not support CONNECT method, it can not proxy https sites.
 
+#client_max_body_size 10240M;
+
 server {
     resolver <SERVER_RESOLVER>;
     resolver_timeout 5s;
