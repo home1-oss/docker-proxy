@@ -3,10 +3,6 @@ upstream backend {
   server <BACKEND_HOST_PORT>;
 }
 
-proxy_send_timeout 120;
-proxy_read_timeout 300;
-proxy_buffering    off;
-tcp_nodelay        on;
 #client_max_body_size 10240M;
 
 server {
